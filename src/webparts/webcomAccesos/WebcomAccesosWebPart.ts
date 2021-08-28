@@ -3,11 +3,12 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'WebcomAccesosWebPartStrings';
+import { setup as pnpSetup } from '@pnp/common';
 import WebcomAccesos from './components/WebcomAccesos';
 import { IWebcomAccesosProps } from './components/IWebcomAccesosProps';
 
@@ -16,18 +17,23 @@ export interface IWebcomAccesosWebPartProps {
 }
 
 export default class WebcomAccesosWebPart extends BaseClientSideWebPart<IWebcomAccesosWebPartProps> {
-
   public render(): void {
-    const element: React.ReactElement<IWebcomAccesosProps> = React.createElement(
-      WebcomAccesos,
-      {
-        description: this.properties.description
-      }
-    );
+    const element: React.ReactElement<IWebcomAccesosProps> =
+      React.createElement(WebcomAccesos, {
+        description: this.properties.description,
+      });
 
     ReactDom.render(element, this.domElement);
   }
+  protected onInit(): Promise<void> {
+    return super.onInit().then((_) => {
+      // other init code may be present
 
+      pnpSetup({
+        spfxContext: this.context,
+      });
+    });
+  }
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
   }
@@ -41,20 +47,20 @@ export default class WebcomAccesosWebPart extends BaseClientSideWebPart<IWebcomA
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            description: strings.PropertyPaneDescription,
           },
           groups: [
             {
               groupName: strings.BasicGroupName,
               groupFields: [
                 PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
-            }
-          ]
-        }
-      ]
+                  label: strings.DescriptionFieldLabel,
+                }),
+              ],
+            },
+          ],
+        },
+      ],
     };
   }
 }
