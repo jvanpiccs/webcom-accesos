@@ -5,10 +5,11 @@ const stackStyles: IStackStyles = {
   root: [
     {
       boxShadow: Depths.depth4,
+      border: '1px solid #e5e5e5',
       height: 200,
-      maxWidth: 220,
+      maxWidth: 230,
       minWidth: 190,
-      width: '100%',
+      width: '100%/4',
       selectors: {
         ':hover': {
           boxShadow: Depths.depth8,
@@ -33,8 +34,8 @@ export const AccesoDestacado: React.FunctionComponent<IAccesoDestacadoProps> = (
         styles={stackStyles}
         onClick={() => (window.location.href = item.Link)}
       >
-        <Stack style={{ height: 130 }}>
-          <img style={{ width: '100%', height: '100%' }} src='#' />
+        <Stack style={{ height: 130, borderBottom:'1px solid #e5e5e5' }}>
+          <img style={{ width: '100%', height: '100%' }} src={item?.Icono} />
         </Stack>
         <Stack>
           <Text style={{ margin: '14px 12px' }}>{item.Title}</Text>

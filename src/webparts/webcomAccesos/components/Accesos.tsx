@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { MotionAnimations, Stack, Text, SearchBox, Separator } from '@fluentui/react';
+import {
+  MotionAnimations,
+  Stack,
+  Text,
+  SearchBox,
+  Separator,
+} from '@fluentui/react';
 import useGetItems from './useGetItems';
 import { AccesoDestacado } from './AccesoDestacado';
 import { useEffect, useState } from 'react';
@@ -9,22 +15,11 @@ export interface IAccesosProps {}
 export const Accesos: React.FunctionComponent<IAccesosProps> = (
   props: React.PropsWithChildren<IAccesosProps>
 ) => {
-  let { items, isLoading } = useGetItems(true);
-  let [accesos, setAccesos] = useState(items);
-  let [queryText, setQueryText] = useState<string>('');
-  console.log({ queryText }, { accesos });
+  let [queryText, setQueryText] = useState<string>(undefined);
+  console.log({queryText});
 
-  useEffect(() => {
-    let results;
-    if (queryText === '') {
-      results = items;
-    } else {
-      results = items.filter((i) =>
-        i.Title.toLowerCase().includes(queryText?.toLowerCase())
-      );
-    }
-    setAccesos(results);
-  }, [queryText]);
+  let { items, isLoading } = useGetItems(true);
+  console.log({ items });
 
   return (
     <>
@@ -39,23 +34,30 @@ export const Accesos: React.FunctionComponent<IAccesosProps> = (
               ) : null
             )}
           </Stack>
-          <Separator/>
+          <br/>
           <Stack wrap horizontal tokens={{ childrenGap: 5 }}>
             <Stack style={{ width: '100%' }}>
               <Stack style={{ width: 220 }}>
                 <SearchBox
-                  placeholder='Buscar accesos'
+                  placeholder='Filtrar'
                   underlined={true}
                   onChange={(_, newValue) => setQueryText(newValue)}
-                  onClear={() => setQueryText('')}
+                  onClear={(ev) => setQueryText('')}
                 />
               </Stack>
             </Stack>
-            {accesos.map((item) =>
-              item.Categoria == 'Acceso' ? (
-                <Acceso key={item.ID} item={item} />
-              ) : null
-            )}
+            <Stack horizontal wrap>
+              {items
+                .filter(
+                  (i) =>
+                    i.Categoria == 'Acceso' &&
+                    (i.Title?.toLowerCase().includes(queryText?.toLowerCase()) || queryText == undefined)
+                )
+                .sort((a, b) => a?.Title - b?.Title)
+                .map((item) => (
+                  <Acceso key={item.ID} item={item} />
+                ))}
+            </Stack>
           </Stack>
         </Stack>
       ) : null}

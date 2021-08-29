@@ -5,6 +5,7 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
 } from '@microsoft/sp-property-pane';
+
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'WebcomAccesosWebPartStrings';
@@ -25,6 +26,7 @@ export default class WebcomAccesosWebPart extends BaseClientSideWebPart<IWebcomA
 
     ReactDom.render(element, this.domElement);
   }
+
   protected onInit(): Promise<void> {
     return super.onInit().then((_) => {
       // other init code may be present

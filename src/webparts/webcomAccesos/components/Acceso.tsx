@@ -12,7 +12,7 @@ export const Acceso: React.FunctionComponent<IAccesoProps> = (props: React.Props
     <>
         <ActionButton 
             style={{ width:270, textAlign:'left', animation:MotionAnimations.fadeIn}}
-            iconProps={{iconName:'Edit'}}
+            iconProps={{iconName:item.Icono}}
             text={item.Title}
             ariaLabel={item.Title}
             href={item.Link}
