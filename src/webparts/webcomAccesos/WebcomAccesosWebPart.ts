@@ -3,7 +3,6 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField,
 } from '@microsoft/sp-property-pane';
 
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
@@ -13,7 +12,6 @@ import {
   IReadonlyTheme,
 } from '@microsoft/sp-component-base';
 
-import * as strings from 'WebcomAccesosWebPartStrings';
 import { setup as pnpSetup } from '@pnp/common';
 import { WebcomAccesos, IWebcomAccesosProps } from './components/WebcomAccesos';
 

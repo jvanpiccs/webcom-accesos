@@ -19,7 +19,6 @@ export default function useGetItems(initLoading:boolean) {
     }
     fetchData();
   }, []);
-  // console.log({items});
   return {
     items, isLoading
   };

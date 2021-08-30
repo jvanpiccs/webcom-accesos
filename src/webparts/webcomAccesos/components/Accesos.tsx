@@ -10,10 +10,7 @@ export const Accesos: React.FunctionComponent<IAccesosProps> = (
   props: React.PropsWithChildren<IAccesosProps>
 ) => {
   let [queryText, setQueryText] = useState<string>(undefined);
-  console.log({ queryText });
-
   let { items, isLoading } = useGetItems(true);
-  console.log({ items });
 
   return (
     <>
