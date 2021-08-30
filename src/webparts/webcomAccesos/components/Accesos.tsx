@@ -1,14 +1,8 @@
 import * as React from 'react';
-import {
-  MotionAnimations,
-  Stack,
-  Text,
-  SearchBox,
-  Separator,
-} from '@fluentui/react';
+import { MotionAnimations, Stack, Text, SearchBox } from '@fluentui/react';
 import useGetItems from './useGetItems';
 import { AccesoDestacado } from './AccesoDestacado';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Acceso } from './Acceso';
 export interface IAccesosProps {}
 
@@ -16,7 +10,7 @@ export const Accesos: React.FunctionComponent<IAccesosProps> = (
   props: React.PropsWithChildren<IAccesosProps>
 ) => {
   let [queryText, setQueryText] = useState<string>(undefined);
-  console.log({queryText});
+  console.log({ queryText });
 
   let { items, isLoading } = useGetItems(true);
   console.log({ items });
@@ -25,16 +19,18 @@ export const Accesos: React.FunctionComponent<IAccesosProps> = (
     <>
       {isLoading === false ? (
         <Stack style={{ animation: MotionAnimations.fadeIn }}>
-          <Text variant='large'>Accesos</Text>
-          <br />
-          <Stack wrap horizontal tokens={{ childrenGap: 13 }}>
+          <Stack
+            wrap
+            horizontal
+            tokens={{ childrenGap: 13 }}
+            style={{ marginBottom: 20 }}
+          >
             {items.map((item) =>
               item.Categoria == 'Acceso Destacado' ? (
                 <AccesoDestacado item={item} />
               ) : null
             )}
           </Stack>
-          <br/>
           <Stack wrap horizontal tokens={{ childrenGap: 5 }}>
             <Stack style={{ width: '100%' }}>
               <Stack style={{ width: 220 }}>
@@ -51,9 +47,11 @@ export const Accesos: React.FunctionComponent<IAccesosProps> = (
                 .filter(
                   (i) =>
                     i.Categoria == 'Acceso' &&
-                    (i.Title?.toLowerCase().includes(queryText?.toLowerCase()) || queryText == undefined)
+                    (i.Title?.toLowerCase().includes(
+                      queryText?.toLowerCase()
+                    ) ||
+                      queryText == undefined)
                 )
-                .sort((a, b) => a?.Title - b?.Title)
                 .map((item) => (
                   <Acceso key={item.ID} item={item} />
                 ))}

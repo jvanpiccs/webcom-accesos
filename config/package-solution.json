@@ -1,14 +1,14 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "webcom-accesos-client-side-solution",
+    "name": "webcom-accesos",
     "id": "a7b50310-695d-4857-91f7-a2da1c916ba8",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "isDomainIsolated": false,
     "developer": {
-      "name": "",
-      "websiteUrl": "",
+      "name": "Juan Picco",
+      "websiteUrl": "https://github.com/jvanpiccs/webcom-accesos",
       "privacyUrl": "",
       "termsOfUseUrl": "",
       "mpnId": ""

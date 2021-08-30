@@ -9,7 +9,8 @@ const stackStyles: IStackStyles = {
       height: 200,
       maxWidth: 230,
       minWidth: 190,
-      width: '100%/4',
+      width: '100%',
+      backgroundColor: "white",
       selectors: {
         ':hover': {
           boxShadow: Depths.depth8,
